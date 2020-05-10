@@ -1,6 +1,22 @@
 # corewar
 
-Made with [abaurens](https://github.com/abaurens) and [johis](https://github.com/johis2808) 
+Made with [thberrid](https://github.com/thberrid) and [johis](https://github.com/johis2808) 
+
+**compilation**
+
+le projet est séparé en deux parties.
+- Le compilateur `asm`
+- La VM `corewar`
+
+Il est possible de compiler une partie avec la commande `make` suivie du nom de la partie voulue:
+`make asm`
+Un appel à make sans autre argument compilera les deux projets.
+
+La vm possède deux option de compilations pouvant être activée ou non lors de l'appel à la commande `make`.
+- `G` pour "graphique": Si cette variable est à `TRUE`, la vm sera compilée en version GUI(graphique). Version CLI(terminal) si non. (⚠ Cette option nécessite d'être sur la branche `visu` du repo et requiert les bibliotheques SDL2 et glm ainsi qu'une compatibilité OpenGL 3.2 au minimum).
+- `ZAZ` pour activer la copie du comportement de zaz. Ce projet a été réalisé dans dans un cadre scolaire en respectant un sujet précis. néanmoins, certaines spécifications du sujet étaient incompatibles avec la vm d'exemple fournie. Si ce flag est à `TRUE`, la vm cherchera à correspondre à celle de zaz u détriment du sujet.
+
+Par exemple, `make corewar ZAZ=TRUE G=TRUE` compilera la vm (corewar) de manière à reproduire le comportement de `zaz` et en version `graphique`
 
 **composition**
 
