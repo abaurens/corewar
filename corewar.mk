@@ -44,12 +44,6 @@ PARSER	:=	\
 PARSER	:=	$(addprefix parser/,$(PARSER))
 
 #
-#	REMOVE THIS BEFORE TURN-IN
-#
-override ZAZ	?= TRUE
-#override G		?= TRUE
-
-#
 #	VM compilation specific flags
 #
 override ZAZ ?= FALSE
@@ -57,54 +51,7 @@ ifeq ($(ZAZ),TRUE)
 override ZAZ_FLAG	:= -DZAZ
 endif
 
-#
-#	Graphic (C++) part
-#
-ifdef G
-ifeq ($(shell uname), Darwin)
-
-GL	:=	-framework OpenGL
-$(COR):	CPPFLAGS	+= -I ~/.brew/include
-$(COR):	LDFLAGS +=	-L ~/.brew/lib
-
-else
-
-GL	:=	-lGL
-
-endif
-
-override GFLAG := -DGRAPHIC=1
-
-CPPFLAGS	:= -I./includes -MMD -MP -W -Wall -Wextra -Werror -std=c++14
-CPPFLAGS	+= -I./$(dir $(LIB))includes $(GFLAG) -O3 -I./includes/corewar
-CPPFLAGS	+= $(shell sdl2-config --cflags) -I./includes/graphic
-
-$(COR):	CFLAGS += $(GFLAG)
-$(COR):	LDFLAGS += $(shell sdl2-config --libs) -lSDL2_image $(GL) -lGLEW
-
-CLASS	:=	\
-			animation	\
-			transform	\
-			texture		\
-			skybox		\
-			shader		\
-			window		\
-			camera		\
-			chunk		\
-			cube
-CLASS	:=	$(addsuffix .cpp, $(CLASS))
-
-GRAPHIC	:= \
-		$(CLASS)		\
-		graphic_loop.cpp
-GRAPHIC	:= $(addprefix graphic/,$(GRAPHIC))
-override LINKER		:=	g++ -o
-
-$(OBJD)/%.o:	$(SRCD)/%.cpp
-	@mkdir -p $(dir $@)
-	g++ $(CPPFLAGS) -o $@ -c $<
-
-endif
+-include vm_graphic.mk
 
 $(COR):	CFLAGS += -march=native -O3 -I./includes/corewar -ansi -pedantic -DVM $(ZAZ_FLAG)
 
@@ -123,43 +70,4 @@ SRC_COR	:=	$(PARSER)	\
 			cmd_parse.c	\
 			$(GRAPHIC)
 
-#
-#	vm unit tests
-#
-TESTER	:=	tester
-
-SPEC	:=	\
-			or.c	\
-			st.c	\
-			ld.c	\
-			add.c	\
-			sub.c	\
-			and.c	\
-			xor.c	\
-			aff.c	\
-			sti.c	\
-			ldi.c	\
-			lld.c	\
-			lldi.c	\
-			zjmp.c	\
-			live.c	\
-			fork.c	\
-			lfork.c
-SPEC	:=	$(addprefix specific_tests/,$(SPEC))
-
-SRC_TST	:=	\
-			$(SPEC)		\
-			main.c		\
-			random.c	\
-			file_gen.c
-SRC_TST	:=	$(addprefix $(TESTER)/,$(SRC_TST)) $(SRC_COM)
-
-OBJ_TST	:=	$(addprefix $(OBJD)/,$(SRC_TST:.c=.o))
-SRC_TST	:=	$(addprefix $(SRCD)/,$(SRC_TST))
-DEP_TST	:=	$(OBJ_TST:.o=.d)
-
--include $(DEP_TST)
-
-$(TESTER):	CFLAGS += -I./includes/tester -DVM_TEST
-$(TESTER): $(OBJ_TST)
-	$(LINKER) $(TESTER) $(OBJ_TST) $(LDFLAGS)
+-include vm_tester.mk
