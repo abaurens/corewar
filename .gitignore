@@ -17,7 +17,6 @@ tests/*
 */*.test
 *.d
 *.cor
-libft/
 
 \.vscode/
 
