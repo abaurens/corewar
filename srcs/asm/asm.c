@@ -18,7 +18,7 @@ int		creat_file(t_instruct_head *head, char *av, t_header *header)
 	char	*npos;
 	int		fd;
 
-	if ((npos = ft_strrchr(av, '.')) > 0)
+	if ((npos = ft_strrchr(av, '.')) != NULL)
 	{
 		if (!(name = ft_strnew(npos - av + 4)))
 			return (-9);

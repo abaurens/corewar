@@ -46,9 +46,6 @@ int			ft_checkchar(char *str, char *type)
 
 int			is_strn_valid(char *str, int n)
 {
-	int	i;
-
-	i = 0;
 	if (!*str)
 		return (0);
 	if (*str == LABEL_CHAR)
@@ -86,9 +83,6 @@ int			ft_strcountchar(char *str, char c)
 
 int			is_str_valid(char *str)
 {
-	int	i;
-
-	i = 0;
 	if (!*str)
 		return (0);
 	if (*str == LABEL_CHAR)
