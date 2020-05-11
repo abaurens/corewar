@@ -6,7 +6,7 @@
 /*   By: smoreno- <smoreno-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 06:05:50 by smoreno-          #+#    #+#             */
-/*   Updated: 2019/11/10 06:34:43 by thberrid         ###   ########.fr       */
+/*   Updated: 2019/12/03 05:06:08 by thberrid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 # include <unistd.h>
 
 # define REG_CHAR	 	"0123456789"
-# define IS_NAME		(1U << 0U)
-# define IS_COMMENT		(1U << 1U)
-# define NAME_DONE		(1U << 2U)
-# define COMMENT_DONE	(1U << 3U)
+# define IS_NAME		1
+# define IS_COMMENT		2
+# define NAME_DONE		4
+# define COMMENT_DONE	8
 
 typedef struct			s_instruc
 {
