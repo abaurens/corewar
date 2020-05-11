@@ -6,7 +6,7 @@
 /*   By: abaurens <abaurens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 01:35:31 by abaurens          #+#    #+#             */
-/*   Updated: 2019/12/03 02:37:08 by abaurens         ###   ########.fr       */
+/*   Updated: 2020/05/11 16:28:59 by abaurens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void					corewar_putlnbr(const int fd, register long int n)
 	if (g_pos >= OUT_BUF_SIZE)
 		flush_buffer(fd);
 }
-
 
 void					corewar_putunbr(const int fd, register unsigned int n)
 {
